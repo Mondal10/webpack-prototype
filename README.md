@@ -1,5 +1,6 @@
 # webpack-prototype
-- Dynamically bundling of specified template
+- Basic webpack configured boilerplate to kick start the project.
+- Dynamically bundling of specified template.
 
 eg:
 - dist
