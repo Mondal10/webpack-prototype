@@ -33,39 +33,59 @@ module.exports = {
                 ],
             },
             {
-                test: /\.(jpe?g|png|gif|mp3)$/i,
+                test: /\.(jpe?g|png|gif|svg)$/i,
                 include: assetSrc,
-                loaders: ['file-loader']
+                loaders: 'file-loader',
+                options: {
+                    outputPath: 'images',
+                }
             },
-            // {
-            //     test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-            //     include: assetSrc,
-            //     loader: 'file-loader'
-            // }
+            {
+                test: /\.(woff2|ttf|eot|)$/i,
+                include: assetSrc,
+                loaders: 'file-loader',
+                options: {
+                    outputPath: 'fonts',
+                }
+            },
         ]
     },
+    // devServer: {
+    //   compress: true,
+    //   disableHostCheck: true,   // This solves browserstack issue
+    // },
     "devtool": isDevEnv ? "source-map" : "",
     plugins: [
         // new CleanWebpackPlugin(['dist']),
         new HTMLWebpackPlugin({
             template: "./src/index.html",
             filename: "index.html"
-        })
+        }),
         // new webpack.ProvidePlugin({
         //     $: 'jquery',
         //     jQuery: 'jquery'
         // }),
-        // new CopyWebpackPlugin([
-        //     {
-        //         from: 'src/global/config',
-        //         to: 'config'
-        //     },
-        //     {
-        //         from: 'src/courses',
-        //         to: 'courses'
-        //     }
-        // ], {
+        // new CopyWebpackPlugin({
+        //     patterns: [
+        //       {
+        //         from: `src/templates/${process.env.FOLDER_NAME}/data`,
+        //         to: 'data'
+        //       },
+        //       {
+        //         from: `src/templates/${process.env.FOLDER_NAME}/audio`,
+        //         to: 'audio'
+        //       },
+        //       {
+        //         from: 'src/global/audio',
+        //         to: 'audio'
+        //       },
+        //       {
+        //         from: 'src/global/data',
+        //         to: 'data'
+        //       }
+        //     ],
+        //   }, {
         //     debug: true
-        // })
+        // }),
     ]
 };

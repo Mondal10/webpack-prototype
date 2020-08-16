@@ -43,7 +43,10 @@ const choices = templates.map(template => ({title: template, value: template}));
 
   process.env.NODE_ENV = environment;
 
-  let script = "webpack-dev-server --open";
+  // let script = "webpack-dev-server --open";
+
+  // For ipad/mobile devices debugging
+  let script = 'webpack-dev-server --open --host 0.0.0.0 --port 8080';
 
   if (process.env.NODE_ENV === "production") {
     script = "webpack";
@@ -52,8 +55,13 @@ const choices = templates.map(template => ({title: template, value: template}));
   console.log(folder, environment, script);
   const child = exec(script);
 
-
+  // Log all the success messages
   child.stdout.on('data',(data) => {
+    console.log(data);
+  });
+
+  // Log all the errors messages
+  child.stderr.on('data', (data) => {
     console.log(data);
   });
 })();
